@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Patient</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f5f9ff;
+            margin: 0;
+        }
+        header {
+            background-color: #1e88e5;
+            color: white;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+        .container {
+            max-width: 500px;
+            margin: 2rem auto;
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        h2 {
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 0.7rem;
+            margin-top: 0.3rem;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+        button {
+            margin-top: 1.5rem;
+            padding: 0.7rem 1.5rem;
+            background-color: #1e88e5;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        a {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #1e88e5;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<header>
+    ➕ Add New Patient
+</header>
+
+<div class="container">
+    <form method="POST">
+        {% csrf_token %}
+        <h2>Patient Information</h2>
+
+        <label for="patient_id">Patient ID</label>
+        <input type="text" name="patient_id" required>
+
+        <label for="patient_name">Patient Name</label>
+        <input type="text" name="patient_name">
+
+        <label for="age">Age</label>
+        <input type="text" name="age">
+
+        <label for="notes">Notes</label>
+        <textarea name="notes" rows="4" placeholder="e.g. PSA levels, cancer stage, etc."></textarea>
+
+        <button type="submit">Create Patient</button>
+        <a href="{% url 'patient_list' %}">← Back to Patient List</a>
+    </form>
+</div>
+</body>
+</html>

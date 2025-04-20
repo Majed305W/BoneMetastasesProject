@@ -1,0 +1,11 @@
+Django>=4.0
+torch
+torchvision
+numpy
+opencv-python
+pillow
+matplotlib
+pydicom
+pylibjpeg
+pylibjpeg-libjpeg
+pylibjpeg-openjpeg

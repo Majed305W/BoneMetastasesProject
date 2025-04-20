@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Patient List</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f5f9ff;
+            margin: 0;
+        }
+        header {
+            background-color: #1e88e5;
+            color: white;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 2rem;
+        }
+        h2 {
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+        .search-bar {
+            margin-bottom: 2rem;
+        }
+        .search-bar input {
+            padding: 0.6rem;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            width: 300px;
+        }
+        .search-bar button {
+            padding: 0.6rem 1rem;
+            margin-left: 0.5rem;
+            border-radius: 6px;
+            background: #1e88e5;
+            color: white;
+            border: none;
+        }
+        .patient-item {
+            background-color: #ffffff;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .patient-item a {
+            text-decoration: none;
+            color: #1e88e5;
+            font-weight: bold;
+        }
+        .button {
+            background-color: #1e88e5;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .button:hover {
+            background-color: #1565c0;
+        }
+        .back-link {
+            margin-top: 2rem;
+            display: inline-block;
+            color: #1e88e5;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<header>
+    📋 Patient List
+</header>
+
+<div class="container">
+    <div class="search-bar">
+        <form method="GET">
+            <input type="text" name="search" placeholder="🔍 Search by Patient ID..." value="{{ search_query }}">
+            <button type="submit">Search</button>
+            <a href="{% url 'add_patient' %}" class="button">➕ Add New Patient</a>
+        </form>
+    </div>
+
+    {% if patients %}
+        {% for patient_id in patients %}
+            <div class="patient-item">
+                👤 <a href="{% url 'patient_detail' patient_id=patient_id %}">{{ patient_id }}</a>
+                <a class="button" href="{% url 'patient_detail' patient_id=patient_id %}">View</a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No patients found.</p>
+    {% endif %}
+
+    <a href="{% url 'index' %}" class="back-link">← Back to Dashboard</a>
+</div>
+</body>
+</html>

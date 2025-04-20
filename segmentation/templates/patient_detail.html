@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Patient Detail</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f5f9ff;
+            margin: 0;
+        }
+        header {
+            background-color: #1e88e5;
+            color: white;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 2rem;
+        }
+        .info-box {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+        .info-box p {
+            margin: 0.5rem 0;
+        }
+        form {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+        form input[type="file"] {
+            padding: 0.7rem;
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            width: 100%;
+        }
+        form button {
+            background-color: #1e88e5;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .study {
+            background-color: #ffffff;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        .study img {
+            max-width: 250px;
+            margin: 0.5rem;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+        .back-link {
+            margin-top: 2rem;
+            display: inline-block;
+            color: #1e88e5;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<header>
+    👤 Patient Detail – {{ patient_id }}
+</header>
+
+<div class="container">
+    <div class="info-box">
+        <h3>Patient Information</h3>
+        <p><strong>Name:</strong> {{ info.Name }}</p>
+        <p><strong>Age:</strong> {{ info.Age }}</p>
+        <p><strong>Notes:</strong> {{ info.Notes|default:"—" }}</p>
+    </div>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h3>Upload New Study</h3>
+        <input type="file" name="image" accept=".dcm,image/*" required />
+        <button type="submit">Run Segmentation</button>
+    </form>
+
+    {% if studies %}
+        <h3>Study History</h3>
+        {% for study in studies %}
+            <div class="study">
+                <p><strong>Study Date:</strong> {{ study.study_date }} | <strong>Series:</strong> {{ study.series_id }}</p>
+                <div>
+                    {% if study.original %}<img src="/{{ study.original }}" alt="Original Image">{% endif %}
+                    {% if study.result %}<img src="/{{ study.result }}" alt="Segmentation Result">{% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No studies found.</p>
+    {% endif %}
+
+    <a href="{% url 'patient_list' %}" class="back-link">← Back to Patient List</a>
+</div>
+</body>
+</html>

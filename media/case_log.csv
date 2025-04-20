@@ -1,0 +1,37 @@
+Patient Name,Patient ID,Age,Input Image,Result Image
+Majed,323842,22,input_3984143e_1 (40).png,result_3984143e_1 (40).png
+44,44,34,input_a7c70412_1 (3).png,result_a7c70412_1 (3).png
+44,44,34,input_f1b5fb2f_1 (3).png,result_f1b5fb2f_1 (3).png
+Khaled,49349,34,input_83d973b8_1 (3).png,result_83d973b8_1 (3).png
+ahmed,3334,23,input_6e0381ff_1 (54).png,result_6e0381ff_1 (54).png
+ahmed,3334,23,input_4695cbb6_1 (54).png,result_4695cbb6_1 (54).png
+ahmed,3334,23,input_d2693cbd_1 (54).png,result_d2693cbd_1 (54).png
+2323,Khaled,33,input_8822e5d2_1 (280).png,result_8822e5d2_1 (280).png
+gahh,4554,56,input_6fb67fc6_1 (3).png,result_6fb67fc6_1 (3).png
+gahh,4554,56,input_0a510b18_1 (3).png,result_0a510b18_1 (3).png
+gahh,4554,56,input_7ba1687d_1 (3).png,result_7ba1687d_1 (3).png
+did,33,223,input_8f7a5152_1 (12).png,result_8f7a5152_1 (12).png
+did,33,223,input_54af6a39_1 (12).png,result_54af6a39_1 (12).png
+did,33,223,input_d21bf9be_1 (12).png,result_d21bf9be_1 (12).png
+did,33,223,input_c612be6d_1 (12).png,result_c612be6d_1 (12).png
+Majed,48348,343,input_42867261_1 (122).png,result_42867261_1 (122).png
+Majed,94934,44,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/94934/ab270ada/192b22/original.png,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/94934/ab270ada/192b22/result.png
+mad,33,333,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/33/c8d6b0c0/7ef3d6/original.png,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/33/c8d6b0c0/7ef3d6/result.png
+moh,123,90,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/123/486cf267/5a92d2/original.png,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/123/486cf267/5a92d2/result.png
+Majed,46734,34,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/46734/5e2fa1b0/fc9eb4/original.png,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/46734/5e2fa1b0/fc9eb4/result.png
+John,44444,33,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/44444/3d1455ac/52e487/original.png,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/44444/3d1455ac/52e487/result.png
+oni,448394,50,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/448394/67f0d6f8/31c733/original.png,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/448394/67f0d6f8/31c733/result.png
+Majed,84728,23,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/84728/95769bc5/1bf279/original.png,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/84728/95769bc5/1bf279/result.png
+hh,55555,44,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/55555/6cf8e927/c4399d/original.png,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/55555/6cf8e927/c4399d/result.png
+Ko,68887,23,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/68887/6b488cd2/8b68b3/original.png,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/68887/6b488cd2/8b68b3/result.png
+Majed,E49343,23,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/E49343/779c37cc/43e69e/original.png,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/E49343/779c37cc/43e69e/result.png
+John Doe,000000,35,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/000000/ea6129f8/9a906b/original.png,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/000000/ea6129f8/9a906b/result.png
+John Doe,999999,45,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/999999/e40937c5/992e38/original.png,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/999999/e40937c5/992e38/result.png
+Majed,9999,45,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/9999/dbab1e97/4a3e66/original.png,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/9999/dbab1e97/4a3e66/result.png
+Mas,sdsd,33,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/sdsd/2b3b70e7/99ca66/original.png,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/sdsd/2b3b70e7/99ca66/result.png
+Majed,34,34,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/34/529138cb/bc97ec/original.png,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/34/529138cb/bc97ec/result.png
+Majed,948458,25,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/948458/e553aef9/c90d33/original.png,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/948458/e553aef9/c90d33/result.png
+Majed-S,33333,28,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/33333/ef66b1e3/ef7d44/original.png,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/33333/ef66b1e3/ef7d44/result.png
+Jack,3773,33,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/3773/f5e1f22d/3b8765/original.png,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/3773/f5e1f22d/3b8765/result.png
+Majed,343,33,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/343/46076770/564353/original.png,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/343/46076770/564353/result.png
+Majed,34737,29,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/34737/090ec67d/a0673a/original.png,/Users/majedal-mutairi/PycharmProjects/BoneMetastasesProject/media/Patients/34737/090ec67d/a0673a/result.png
