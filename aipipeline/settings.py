@@ -21,8 +21,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
-    'accounts',           # ✅ Your custom user model and signals
-    'segmentation',       # ✅ Your AI/patient logic app
+    'accounts',           # ✅ Custom user model and auth
+    'segmentation',       # ✅ AI + patient handling app
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -47,7 +47,7 @@ ROOT_URLCONF = 'aipipeline.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],  # You can add your template dirs here if needed
+        'DIRS': [],  # You can add template paths here if needed
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -84,13 +84,14 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files
+# ✅ Static files (CSS, JS)
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'segmentation', 'static'),  # ✅ Static for your segmentation app
+    os.path.join(BASE_DIR, 'segmentation', 'static'),
+    os.path.join(BASE_DIR, 'staticfiles'),# Static for your segmentation app
 ]
 
-# ✅ Media (for uploaded CT scans, results, etc.)
+# ✅ Media files (DICOM, segmentation results, etc.)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 

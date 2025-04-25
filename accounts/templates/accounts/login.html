@@ -1,8 +1,9 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Login | ProMetaScan</title>
+  <title>Radiomics Lab – USC AI Dashboard for Bone Metastases</title>
   <style>
     body {
       background-color: #f5f9ff;
@@ -21,17 +22,31 @@
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       width: 100%;
       max-width: 400px;
+      text-align: center;
+    }
+
+    .form-container img {
+      height: 60px;
+      margin-bottom: 10px;
     }
 
     h2 {
-      margin-top: 0;
-      text-align: center;
+      margin: 10px 0 5px;
       color: #1e88e5;
+      font-size: 22px;
+    }
+
+    h3 {
+      margin: 0 0 20px;
+      font-weight: normal;
+      font-size: 16px;
+      color: #555;
     }
 
     form {
       display: flex;
       flex-direction: column;
+      text-align: left;
     }
 
     label {
@@ -79,7 +94,9 @@
 </head>
 <body>
   <div class="form-container">
-    <h2>🔐 Login to ProMetaScan</h2>
+    <img src="{% static 'logo/radiomics_logo.png' %}" alt="Radiomics Lab Logo">
+    <h2>Radiomics Lab</h2>
+    <h3>USC AI Dashboard for Bone Metastases</h3>
     <form method="post">
       {% csrf_token %}
       {{ form.as_p }}

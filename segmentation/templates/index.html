@@ -1,238 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>ProMetaScan – AI Dashboard</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f5f9ff;
-      color: #333;
-    }
+{% extends 'base.html' %}
 
-    header {
-      background-color: #1e88e5;
-      color: white;
-      padding: 20px;
-      text-align: center;
-      position: relative;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .layout {
-      display: flex;
-    }
-
-    .sidebar {
-      width: 280px;
-      background-color: #ecf0f1;
-      padding: 20px;
-      border-right: 1px solid #ccc;
-    }
-
-    .sidebar h3 {
-      margin-top: 0;
-    }
-
-    .sidebar form input,
-    .sidebar form button {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-    }
-
-    .sidebar button {
-      background-color: #1e88e5;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .main {
-      flex-grow: 1;
-      padding: 30px;
-    }
-
-    .patient-info, .history {
-      background-color: white;
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.1);
-      margin-bottom: 30px;
-    }
-
-    .viewer {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-      margin-bottom: 15px;
-    }
-
-    .zoom-container {
-      overflow: hidden;
-      background: white;
-      padding: 10px;
-      border-radius: 10px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.2);
-      text-align: center;
-    }
-
-    .zoom-img {
-      width: 600px;
-      transition: transform 0.2s ease-in-out;
-      cursor: zoom-in;
-    }
-
-    .controls {
-      text-align: center;
-      margin-top: 10px;
-      margin-bottom: 30px;
-    }
-
-    .controls button {
-      margin: 0 5px;
-      padding: 6px 15px;
-      font-weight: bold;
-      border-radius: 5px;
-      border: none;
-      background: #2980b9;
-      color: white;
-      cursor: pointer;
-    }
-
-    .controls button:hover {
-      background: #2471a3;
-    }
-
-    .case {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 30px;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-    }
-
-    .case img {
-      width: 300px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-  </style>
-</head>
-<body>
-
-<header>
-  <h1>🧬 ProMetaScan</h1>
-  <small>AI Dashboard for Prostate Bone Metastases</small>
-  {% if user.is_authenticated %}
-    <div style="position: absolute; top: 20px; right: 20px; text-align: right;">
-      <p style="margin: 0;">Welcome, {{ user.username }} ({{ user.role }})</p>
-      <form action="{% url 'logout' %}" method="POST" style="margin-top: 5px;">
-        {% csrf_token %}
-        <button type="submit" style="padding: 5px 10px;">Logout</button>
-      </form>
+{% block content %}
+<div class="main">
+  <div style="display: flex; gap: 2rem; margin-bottom: 2rem;">
+    <div style="flex: 1; padding: 1rem; background: #e3f2fd; border-radius: 8px;">
+      <h3>Total Patients</h3>
+      <p style="font-size: 1.5rem;">{{ total_patients }}</p>
     </div>
+    <div style="flex: 1; padding: 1rem; background: #e8f5e9; border-radius: 8px;">
+      <h3>Total Studies</h3>
+      <p style="font-size: 1.5rem;">{{ total_studies }}</p>
+    </div>
+  </div>
+
+  {% if uploaded_image %}
+  <div class="patient-info">
+    <strong>Patient:</strong> {{ patient_name }}<br>
+    <strong>ID:</strong> {{ patient_id }}<br>
+    <strong>Age:</strong> {{ age }}
+  </div>
+
+  <div class="viewer">
+    <div class="zoom-container">
+      <img id="inputImg" class="zoom-img" src="{{ uploaded_image }}" alt="Original">
+      <p style="font-weight: bold;">Original CT</p>
+    </div>
+    <div class="zoom-container">
+      <img id="resultImg" class="zoom-img" src="{{ result_image }}" alt="Segmentation">
+      <p style="font-weight: bold;">AI Segmentation</p>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button onclick="zoomIn()">Zoom In</button>
+    <button onclick="zoomOut()">Zoom Out</button>
+    <button onclick="resetZoom()">Reset</button>
+  </div>
   {% endif %}
 
-  <form method="GET" action="{% url 'patient_list' %}" style="margin-top: 20px;">
-    <input
-      type="text"
-      name="search"
-      placeholder="🔍 Search Patient ID"
-      style="padding: 0.5rem; border-radius: 6px; border: 1px solid #ccc;"
-    />
-    <button type="submit" style="padding: 0.5rem; border-radius: 6px; background: #1565c0; color: white; border: none;">
-      Search
-    </button>
-  </form>
-
-  <a href="{% url 'patient_list' %}" style="margin-top: 1rem; display: inline-block; color: #fff;">
-    📁 View All Patients
-  </a>
-</header>
-
-<div class="layout">
-  <div class="sidebar">
-    <h3>New Case Upload</h3>
-    <form method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-      <input type="text" name="patient_name" placeholder="Patient Name" required>
-      <input type="text" name="patient_id" placeholder="Patient ID" required>
-      <input type="number" name="age" placeholder="Age" required>
-      <input type="file" name="image" accept=".dcm, image/*" required>
-      <button type="submit">Run Segmentation</button>
-    </form>
-
-    <h3>📄 Radiologist Report (optional)</h3>
-    <form method="POST" enctype="multipart/form-data" action="{% url 'upload_report' %}">
-      {% csrf_token %}
-      <input type="file" name="report_file" accept=".txt,.pdf">
-      <button type="submit">Upload Report</button>
-    </form>
+  {% if history %}
+  <div style="text-align:center; margin-bottom:15px;">
+    <button onclick="toggleHistory()" style="padding: 8px 16px; font-weight:bold;">Show/Hide Previous Cases</button>
   </div>
 
-  <div class="main">
-    <div style="display: flex; gap: 2rem; margin-bottom: 2rem;">
-      <div style="flex: 1; padding: 1rem; background: #e3f2fd; border-radius: 8px;">
-          <h3>Total Patients</h3>
-          <p style="font-size: 1.5rem;">{{ total_patients }}</p>
-      </div>
-      <div style="flex: 1; padding: 1rem; background: #e8f5e9; border-radius: 8px;">
-          <h3>Total Studies</h3>
-          <p style="font-size: 1.5rem;">{{ total_studies }}</p>
-      </div>
+  <div class="history" id="historySection">
+    <h4>Previous Cases</h4>
+    {% for input, result, patient_id, study_date in history %}
+    <div class="case">
+      <p><strong>{{ patient_id }}</strong> | <em>{{ study_date }}</em></p>
+      <img src="/media/{{ input }}" alt="CT" class="zoom-img">
+      <img src="/media/{{ result }}" alt="Result" class="zoom-img">
     </div>
-
-    {% if uploaded_image %}
-    <div class="patient-info">
-      <strong>Patient:</strong> {{ patient_name }}<br>
-      <strong>ID:</strong> {{ patient_id }}<br>
-      <strong>Age:</strong> {{ age }}
-    </div>
-
-    <div class="viewer">
-      <div class="zoom-container">
-        <img id="inputImg" class="zoom-img" src="{{ uploaded_image }}" alt="Original">
-        <p style="font-weight: bold;">Original CT</p>
-      </div>
-      <div class="zoom-container">
-        <img id="resultImg" class="zoom-img" src="{{ result_image }}" alt="Segmentation">
-        <p style="font-weight: bold;">AI Segmentation</p>
-      </div>
-    </div>
-
-    <div class="controls">
-      <button onclick="zoomIn()">Zoom In</button>
-      <button onclick="zoomOut()">Zoom Out</button>
-      <button onclick="resetZoom()">Reset</button>
-    </div>
-    {% endif %}
-
-    {% if history %}
-    <div style="text-align:center; margin-bottom:15px;">
-      <button onclick="toggleHistory()" style="padding: 8px 16px; font-weight:bold;">Show/Hide Previous Cases</button>
-    </div>
-
-    <div class="history" id="historySection">
-      <h4>Previous Cases</h4>
-      {% for input, result, patient_id, study_date in history %}
-      <div class="case">
-        <p><strong>{{ patient_id }}</strong> | <em>{{ study_date }}</em></p>
-        <img src="/media/{{ input }}" alt="CT" class="zoom-img">
-        <img src="/media/{{ result }}" alt="Result" class="zoom-img">
-      </div>
-      {% endfor %}
-    </div>
-    {% endif %}
+    {% endfor %}
   </div>
+  {% endif %}
 </div>
 
 <script>
@@ -280,6 +101,4 @@
     }
   };
 </script>
-
-</body>
-</html>
+{% endblock %}

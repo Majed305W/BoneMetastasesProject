@@ -298,11 +298,9 @@ def add_patient(request):
         age = request.POST.get('age')
         notes = request.POST.get('notes', '')
 
-        # Create patient folder
         patient_folder = os.path.join(settings.MEDIA_ROOT, 'Patients', patient_id)
         os.makedirs(patient_folder, exist_ok=True)
 
-        # Save info into a metadata text file (for now)
         info_path = os.path.join(patient_folder, 'info.txt')
         with open(info_path, 'w') as f:
             f.write(f'Name: {patient_name}\n')
@@ -312,3 +310,11 @@ def add_patient(request):
         return redirect('patient_detail', patient_id=patient_id)
 
     return render(request, 'add_patient.html')
+
+# ✅ NEW VIEW TO SHOW STATIC DICOM & SEGMENTATION RESULTS
+@login_required(login_url='/accounts/login/')
+def dicom_result_view(request):
+    return render(request, 'dicom_results.html', {
+        'original_image': 'media/results/original_image.png',
+        'segmentation_image': 'media/results/segmentation_result.png'
+    })

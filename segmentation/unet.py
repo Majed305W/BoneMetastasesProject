@@ -104,9 +104,9 @@ image = Image.open(image_path)
 image = transform(image).unsqueeze(0).to(device)
 
 # ✅ Step 4: Visualize the Model Input (Debugging)
-plt.imshow(image.cpu().squeeze().numpy(), cmap='gray')
-plt.title("Model Input Image")
-plt.axis('off')
+# plt.imshow(image.cpu().squeeze().numpy(), cmap='gray')
+# plt.title("Model Input Image")
+# plt.axis('off')
 # plt.show()  # Disabled to avoid popup during server run
 
 # ✅ Step 5: Run Inference
@@ -123,12 +123,16 @@ mask = (output > 0.2).astype(np.uint8)
 # ✅ Step 7: Post-Processing with OpenCV (Remove Small Artifacts)
 mask_cleaned = cv2.medianBlur(mask.astype(np.uint8), 5)  # Apply median filter to smooth
 
-# ✅ Step 8: Save and Display the Segmentation Result
+# ✅ Step 8: Save the Segmentation Result (No GUI)
+import matplotlib
+matplotlib.use('Agg')  # ✅ Safe backend for saving plots without displaying
+
 result_path = './results/segmentation_result.png'
 plt.imshow(mask_cleaned, cmap='gray')
 plt.title("Segmentation Result (Bone & Tumors)")
 plt.axis('off')
 plt.savefig(result_path)
-# plt.show()  # Disabled to avoid popup during server run
+plt.close()  # ✅ Always close the figure after saving
+
 
 print(f"✅ Segmentation result saved: {result_path}")
