@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: BoneMetastasesProject
+    env: docker
+    plan: free
+    branch: main
+    region: oregon
+    dockerfilePath: Dockerfile
+    buildCommand: ""
+    startCommand: >
+      sh -c "python manage.py migrate &&
+      python manage.py collectstatic --noinput &&
+      gunicorn aipipeline.wsgi:application --bind 0.0.0.0:8000"
