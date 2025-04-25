@@ -47,7 +47,7 @@ ROOT_URLCONF = 'aipipeline.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],  # You can add template paths here if needed
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -84,14 +84,16 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# ✅ Static files (CSS, JS)
+# ✅ Static files (CSS, JS, etc.)
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'segmentation', 'static'),
-    os.path.join(BASE_DIR, 'staticfiles'),# Static for your segmentation app
+    os.path.join(BASE_DIR, 'segmentation', 'static'),  # App-level static
+    os.path.join(BASE_DIR, 'static'),                  # Optional: project-level static folder
 ]
 
-# ✅ Media files (DICOM, segmentation results, etc.)
+# ✅ Media files (uploaded images, DICOMs, segmentation outputs)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
